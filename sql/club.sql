@@ -11,7 +11,7 @@
  Target Server Version : 80032 (8.0.32)
  File Encoding         : 65001
 
- Date: 28/06/2023 23:04:54
+ Date: 29/06/2023 22:47:52
 */
 
 SET NAMES utf8mb4;
@@ -33,13 +33,37 @@ CREATE TABLE `activity`  (
   `club_id` int NOT NULL DEFAULT 0,
   `number` int UNSIGNED NOT NULL DEFAULT 10,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 41 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 44 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of activity
 -- ----------------------------
-INSERT INTO `activity` VALUES (39, 'test1', '星巴克', '2023 年 06 月 01 日', '<p>test1 </p>', '2023-06-28 13:41:37', 0, 1, 0, 10);
-INSERT INTO `activity` VALUES (40, '2121', '31231', '2023 年 06 月 29 日', '<p>3123132</p>', '2023-06-28 20:08:24', 0, 114514, 0, 10);
+INSERT INTO `activity` VALUES (42, '123', '123', '2023 年 06 月 01 日', '<p>123</p>', '2023-06-29 16:06:01', 0, 1, 0, 10);
+INSERT INTO `activity` VALUES (43, 'test', 'dcscds', '2023 年 06 月 29 日', '<p>cscdscs</p>', '2023-06-29 17:55:41', 0, 2, 0, 10);
+
+-- ----------------------------
+-- Table structure for activity_comment
+-- ----------------------------
+DROP TABLE IF EXISTS `activity_comment`;
+CREATE TABLE `activity_comment`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NULL DEFAULT NULL,
+  `activity_id` int NULL DEFAULT NULL,
+  `comment` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `create_time` timestamp NULL DEFAULT NULL,
+  `fa_num` int NULL DEFAULT 0,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 38 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of activity_comment
+-- ----------------------------
+INSERT INTO `activity_comment` VALUES (1, 1, 1, '提到《原神》，就不可避免的想到开放世界。确实，现在《原神》基本已经成了开放世界的代名词(国内)。原神的主体内容其实就是不断的探险，不断的完成任务，不断的帮人。但其他内容却很丰富，主要分为角色系统，冒险系统，武器系统和抽卡系统这四大类，这四类环环相扣，但是每一类却都很优秀。', '2023-05-11 13:21:32', 0);
+INSERT INTO `activity_comment` VALUES (31, 42, 42, 'asdsad', '2023-06-29 12:34:42', 0);
+INSERT INTO `activity_comment` VALUES (32, 1, 42, '还活着呢', '2023-06-29 13:00:28', 31);
+INSERT INTO `activity_comment` VALUES (33, 1, 42, '必活着啊', '2023-06-29 13:00:49', 32);
+INSERT INTO `activity_comment` VALUES (34, 1, 42, 'test', '2023-06-29 13:01:10', 0);
+INSERT INTO `activity_comment` VALUES (37, 1, 42, '**', '2023-06-29 14:42:10', 0);
 
 -- ----------------------------
 -- Table structure for activity_member
@@ -50,7 +74,7 @@ CREATE TABLE `activity_member`  (
   `user_id` int NULL DEFAULT NULL,
   `club_id` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of activity_member
@@ -89,8 +113,9 @@ CREATE TABLE `club`  (
 -- ----------------------------
 -- Records of club
 -- ----------------------------
-INSERT INTO `club` VALUES (122, 'sdasd1', '<p>sdadsa1</p>', '2023-06-28 16:00:00', 5, 0);
-INSERT INTO `club` VALUES (114514, 'wuhufly的yinp', '<p>玩植物大战僵尸的都该死</p>', '2023-05-30 16:00:00', 5, 0);
+INSERT INTO `club` VALUES (1, 'test', '<p>test</p>', '2023-06-27 16:00:00', 1, 0);
+INSERT INTO `club` VALUES (2, 'test1', '<p>test1</p>', '2023-06-27 16:00:00', 2, 0);
+INSERT INTO `club` VALUES (3, 'test2', '<p>test2</p>', '2019-04-22 16:00:00', 5, 0);
 
 -- ----------------------------
 -- Table structure for club_apply
@@ -102,19 +127,12 @@ CREATE TABLE `club_apply`  (
   `club_id` int NULL DEFAULT NULL,
   `is_join` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 54 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 67 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of club_apply
 -- ----------------------------
-INSERT INTO `club_apply` VALUES (1, 1, 100, 1);
-INSERT INTO `club_apply` VALUES (4, 44, 1, 1);
-INSERT INTO `club_apply` VALUES (6, 46, 79, NULL);
-INSERT INTO `club_apply` VALUES (42, 42, 1, 1);
-INSERT INTO `club_apply` VALUES (43, 43, 1, 1);
-INSERT INTO `club_apply` VALUES (48, 1, 1, -1);
-INSERT INTO `club_apply` VALUES (52, 1, 114514, 0);
-INSERT INTO `club_apply` VALUES (53, 1, 114514, 0);
+INSERT INTO `club_apply` VALUES (66, 47, 2, 1);
 
 -- ----------------------------
 -- Table structure for club_member
@@ -125,13 +143,14 @@ CREATE TABLE `club_member`  (
   `user_id` int NULL DEFAULT NULL,
   `club_id` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of club_member
 -- ----------------------------
-INSERT INTO `club_member` VALUES (1, 1, 37);
-INSERT INTO `club_member` VALUES (2, 1, 39);
+INSERT INTO `club_member` VALUES (7, 1, 39);
+INSERT INTO `club_member` VALUES (8, 42, 39);
+INSERT INTO `club_member` VALUES (9, 42, 42);
 
 -- ----------------------------
 -- Table structure for club_type
@@ -166,16 +185,27 @@ CREATE TABLE `file`  (
   `passage_id` int NOT NULL DEFAULT 0 COMMENT '关联文章id',
   `activity_id` int NOT NULL DEFAULT 0 COMMENT '关联活动id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 139 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 170 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of file
 -- ----------------------------
-INSERT INTO `file` VALUES (133, '关于2022年“外研社·国才杯”全国英语演讲大赛、英语写作大赛及英语阅读大赛的通知(1)(1).docx', '/files/关于2022年“外研社·国才杯”全国英语演讲大赛、英语写作大赛及英语阅读大赛的通知(1)(1).docx', '2023-06-28 11:46:17', 2, 0, 0);
-INSERT INTO `file` VALUES (134, 'khl20230620234315645.png', '/images/activity//khl20230620234315645.png', '2023-06-28 13:41:37', 6, 0, 37);
-INSERT INTO `file` VALUES (135, 'khl20230620234315645.png', '/images/passage//khl20230620234315645.png', '2023-06-28 14:18:31', 4, 130, 0);
-INSERT INTO `file` VALUES (136, '114514', '/images/club//Z}84RSGY_47@MLZ6RN}IM$R.jpg', '2023-06-28 14:58:30', 7, 0, 0);
-INSERT INTO `file` VALUES (138, 'yong sp.jpg', '/images/activity//yong sp.jpg', '2023-06-28 20:08:24', 6, 0, 38);
+INSERT INTO `file` VALUES (150, 'khl20230620234315645.png', '/images/activity//khl20230620234315645.png', '2023-06-29 16:06:01', 6, 0, 42);
+INSERT INTO `file` VALUES (151, '1', '/images/club//3.png', '2023-06-29 16:08:19', 7, 0, 0);
+INSERT INTO `file` VALUES (152, '2', '/images/club//6.png', '2023-06-29 16:09:01', 7, 0, 0);
+INSERT INTO `file` VALUES (153, '3', '/images/club//5.png', '2023-06-29 16:09:33', 7, 0, 0);
+INSERT INTO `file` VALUES (154, '3', '/images/club//3.png', '2023-06-29 16:09:33', 7, 0, 0);
+INSERT INTO `file` VALUES (155, '3', '/images/club//2.png', '2023-06-29 16:09:33', 7, 0, 0);
+INSERT INTO `file` VALUES (156, '2020121-佘明聪.docx', '/files/2020121-佘明聪.docx', '2023-06-29 16:32:43', 3, 0, 0);
+INSERT INTO `file` VALUES (160, 'khl20230620234315645.png', '/images/activity//khl20230620234315645.png', '2023-06-29 16:06:01', 7, 0, 42);
+INSERT INTO `file` VALUES (161, '2020121-佘明聪.docx', '/files/2020121-佘明聪.docx', '2023-06-29 16:55:55', 6, 0, 42);
+INSERT INTO `file` VALUES (163, 'xxb.jpg', '/images/club/', '2023-06-29 16:49:37', 1, 0, 0);
+INSERT INTO `file` VALUES (164, '2.png', '/images/passage/', '2023-06-29 17:40:08', 1, 0, 0);
+INSERT INTO `file` VALUES (165, '2.png', '/images/passage//2.png', '2023-06-29 17:40:08', 4, 134, 0);
+INSERT INTO `file` VALUES (166, '1.png', '/images/activity/', '2023-06-29 17:55:42', 1, 0, 0);
+INSERT INTO `file` VALUES (167, '1.png', '/images/activity//1.png', '2023-06-29 17:55:43', 6, 0, 43);
+INSERT INTO `file` VALUES (168, 'xxb.jpg', '/images/passage/', '2023-06-29 20:57:27', 1, 0, 0);
+INSERT INTO `file` VALUES (169, 'xxb.jpg', '/images/passage//xxb.jpg', '2023-06-29 20:57:28', 4, 135, 0);
 
 -- ----------------------------
 -- Table structure for file_type
@@ -232,12 +262,14 @@ CREATE TABLE `passage`  (
   `publish_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `click_num` int NOT NULL DEFAULT 0 COMMENT '点击次数',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 131 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 136 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of passage
 -- ----------------------------
-INSERT INTO `passage` VALUES (130, 'A!', '<p>Apex</p>', '社团管理员', '社团管理员', 1, 0, '2023-06-28 14:18:31', 0);
+INSERT INTO `passage` VALUES (133, 'test', '<p>test</p>', '社团管理员', '社团管理员', 1, 0, '2023-06-29 15:55:56', 0);
+INSERT INTO `passage` VALUES (134, 'dsds', '<p>czxcdz</p>', '社团管理员', '社团管理员', 1, 0, '2023-06-29 17:40:07', 0);
+INSERT INTO `passage` VALUES (135, 'test', '<p>测试是否有用</p>', '社团管理员', '社团管理员', 1, 0, '2023-06-29 20:57:27', 0);
 
 -- ----------------------------
 -- Table structure for passage_type
@@ -292,7 +324,7 @@ CREATE TABLE `user`  (
   `is_active` tinyint(1) NOT NULL DEFAULT 0 COMMENT '用户是否激活（默认0，未激活；1激活）',
   `last_login_time` varchar(80) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 46 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 48 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
@@ -302,6 +334,7 @@ INSERT INTO `user` VALUES (42, 'test', '', 1, '', 'test@163.com', '123456', 2, '
 INSERT INTO `user` VALUES (43, 'test1', '', 1, '', 'test1@163.com', '123456', 4, '2023-06-27 16:00:00', 0, NULL);
 INSERT INTO `user` VALUES (44, 'avd', '', 1, '', 'leil@163.com', '123456', 4, '2023-06-27 16:00:00', 0, NULL);
 INSERT INTO `user` VALUES (45, 'hasiudxha', '', 0, '', '1234@qq.com', '123456', 4, '2023-06-28 09:51:41', 0, NULL);
+INSERT INTO `user` VALUES (47, '', '', 0, '', 'qwe@163.com', '123456', 0, '2023-06-29 17:41:27', 0, NULL);
 
 -- ----------------------------
 -- Table structure for user_club
@@ -312,7 +345,7 @@ CREATE TABLE `user_club`  (
   `user_id` int NULL DEFAULT NULL COMMENT '职称名称',
   `club_id` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user_club
